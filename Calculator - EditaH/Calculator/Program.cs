@@ -43,14 +43,14 @@ namespace Calculator
             while (true) 
             {
                 Console.WriteLine("Vyber operaci (soucet/rozdil/soucin/podil/mocnina/druha odmocnina/zavorka):");
-                string operace = Console.ReadLine();
+                string operation = Console.ReadLine();
 
-                double vysledek = 0;
+                double result = 0;
                 
-                bool spatnaOperace = true;
+                bool wrongOperation = true;
                 
 
-                if (operace == "mocnina")
+                if (operation == "mocnina")
                 {
                     /*Console.WriteLine("Zadej číslo, které chcete mocnit");
                     string aString = Console.ReadLine();
@@ -76,18 +76,18 @@ namespace Calculator
 
                     }
 
-                    double mocninaCislo;
-                    double malo = a;
+                    double multiNumber;
+                    double tooLittle = a;
                     
                     while (true)
                     {
                         Console.WriteLine("Zadej číslo mocniny");
-                        string mocninaCisloString = Console.ReadLine();
+                        string multiNumberString = Console.ReadLine();
 
 
-                        if (double.TryParse(mocninaCisloString, out _))
+                        if (double.TryParse(multiNumberString, out _))
                         {
-                            mocninaCislo = Convert.ToDouble(mocninaCisloString);
+                            multiNumber = Convert.ToDouble(multiNumberString);
                             break;
                         }
                         else
@@ -97,49 +97,49 @@ namespace Calculator
 
                     }                    
 
-                    if (mocninaCislo == 0)
+                    if (multiNumber == 0)
                     {
-                        vysledek = 1;
+                        result = 1;
 
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
-                    else if (mocninaCislo > 1)
+                    else if (multiNumber > 1)
                     {
-                        while (mocninaCislo > 1)
+                        while (multiNumber > 1)
                         {
-                            vysledek = malo * a;
-                            mocninaCislo--;
-                            malo = vysledek;
+                            result = tooLittle * a;
+                            multiNumber--;
+                            tooLittle = result;
                         }
 
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
-                    else if (mocninaCislo == 1)
+                    else if (multiNumber == 1)
                     {
-                        vysledek = a;
+                        result = a;
 
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
                     else
                     {
                         double meziVypocet = 0;
 
-                        while (mocninaCislo < -1)
+                        while (multiNumber < -1)
                         {
-                            meziVypocet = malo * a;
-                            mocninaCislo++;
-                            malo = meziVypocet;
+                            meziVypocet = tooLittle * a;
+                            multiNumber++;
+                            tooLittle = meziVypocet;
                         }
 
-                        vysledek = 1 / meziVypocet;
+                        result = 1 / meziVypocet;
 
-                        Console.WriteLine("Výsledek operace je 1/" + meziVypocet + ", což je zaokrouhleno na "+ vysledek);
+                        Console.WriteLine("Výsledek operace je 1/" + meziVypocet + ", což je zaokrouhleno na "+ result);
                     }
 
-                    spatnaOperace = false;
+                    wrongOperation = false;
                 }
 
-                else if (operace == "druha odmocnina")
+                else if (operation == "druha odmocnina")
                 {
                     double a;
 
@@ -161,18 +161,18 @@ namespace Calculator
 
                     if (a >= 0)
                     {
-                        vysledek = (float)Math.Sqrt(a);
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        result = (float)Math.Sqrt(a);
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
                     else
                     {
                         Console.WriteLine("Nelze odmocnit zápornou hodnotu.");
                     }
 
-                    spatnaOperace = false;                                        
+                    wrongOperation = false;                                        
                 }
 
-                else if (operace == "soucet" || operace == "rozdil" || operace == "soucin" || operace == "podil")
+                else if (operation == "soucet" || operation == "rozdil" || operation == "soucin" || operation == "podil")
                 {
                     double a;
                     while (true)
@@ -207,22 +207,22 @@ namespace Calculator
                         }
                     }
 
-                    if (operace == "soucet")
+                    if (operation == "soucet")
                     {
-                        vysledek = a + b;
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        result = a + b;
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
-                    else if (operace == "rozdil")
+                    else if (operation == "rozdil")
                     {
-                        vysledek = a - b;
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        result = a - b;
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
-                    else if (operace == "soucin")
+                    else if (operation == "soucin")
                     {
-                        vysledek = a * b;
-                        Console.WriteLine("Výsledek operace je " + vysledek);
+                        result = a * b;
+                        Console.WriteLine("Výsledek operace je " + result);
                     }
-                    else if (operace == "podil")
+                    else if (operation == "podil")
                     {
                         if (b == 0)
                         {
@@ -230,13 +230,13 @@ namespace Calculator
                         }
                         else
                         {
-                            vysledek = a / b;
-                            Console.WriteLine("Výsledek operace je " + vysledek);
+                            result  = a / b;
+                            Console.WriteLine("Výsledek operace je " + result);
                         }
                     }
 
                 }
-                else if (operace == "zavorka")
+                else if (operation == "zavorka")
                 {
                     double zavorka = 0;
 
@@ -324,15 +324,15 @@ namespace Calculator
                     
                     if (operaceMimoZavorku == "soucet")
                     {
-                        vysledek = zavorka + c;
+                        result = zavorka + c;
                     }
                     else if (operaceMimoZavorku == "rozdil")
                     {
-                        vysledek = zavorka - c;
+                        result = zavorka - c;
                     }
                     else if (operaceMimoZavorku == "soucin")
                     {
-                        vysledek = zavorka * c;
+                        result = zavorka * c;
                     }
                     else if (operaceMimoZavorku == "podil")
                     {
@@ -342,7 +342,7 @@ namespace Calculator
                         }
                         else
                         {
-                            vysledek = zavorka / c;
+                            result = zavorka / c;
                         }
                     }
                     else
@@ -350,17 +350,17 @@ namespace Calculator
                         Console.WriteLine("Nebyla zadaná operace");
                     }
                     
-                    Console.WriteLine("Výsledek operace je " + vysledek);
+                    Console.WriteLine("Výsledek operace je " + result);
 
-                    spatnaOperace = false;
+                    wrongOperation = false;
                 }
                 else
                 {
                     Console.WriteLine("Špatně zadaná operace.");
-                    spatnaOperace = false;
+                    wrongOperation = false;
                 }
 
-                while (spatnaOperace == true)
+                while (wrongOperation == true)
                 {
                     Console.WriteLine("Chceš přidat ještě jednu operaci (ano/ne)?");
                     string druhaOperace = Console.ReadLine();
@@ -390,17 +390,17 @@ namespace Calculator
 
                         if (operaceDva == "soucet")
                         {
-                            novyVysledek = (float)(vysledek + x);
+                            novyVysledek = (float)(result + x);
                             Console.WriteLine("Výsledek operace je " + novyVysledek);
                         }
                         else if (operaceDva == "rozdil")
                         {
-                            novyVysledek = (float)(vysledek - x);
+                            novyVysledek = (float)(result - x);
                             Console.WriteLine("Výsledek operace je " + novyVysledek);
                         }
                         else if (operaceDva == "soucin")
                         {
-                            novyVysledek = (float)(vysledek * x);
+                            novyVysledek = (float)(result * x);
                             Console.WriteLine("Výsledek operace je " + novyVysledek);
                         }
                         else if (operaceDva == "podil")
@@ -411,7 +411,7 @@ namespace Calculator
                             }
                             else
                             {
-                                novyVysledek = (float)(vysledek / x);
+                                novyVysledek = (float)(result / x);
                                 Console.WriteLine("Výsledek operace je " + novyVysledek);
                             }
                         }
@@ -420,13 +420,13 @@ namespace Calculator
                             Console.WriteLine("Nebyla zadaná operace");
                         }
 
-                        vysledek = novyVysledek;
+                        result = novyVysledek;
 
                     }
                     else if (druhaOperace == "ne")
                     {
                         Console.WriteLine(" ");
-                        spatnaOperace = false;
+                        wrongOperation = false;
                     }
                     else
                     {
