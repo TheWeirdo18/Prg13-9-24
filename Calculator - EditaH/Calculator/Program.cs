@@ -122,18 +122,18 @@ namespace Calculator
                     }
                     else
                     {
-                        double meziVypocet = 0;
+                        double addedCalculation = 0;
 
                         while (multiNumber < -1)
                         {
-                            meziVypocet = tooLittle * a;
+                            addedCalculation = tooLittle * a;
                             multiNumber++;
-                            tooLittle = meziVypocet;
+                            tooLittle = addedCalculation;
                         }
 
-                        result = 1 / meziVypocet;
+                        result = 1 / addedCalculation;
 
-                        Console.WriteLine("Výsledek operace je 1/" + meziVypocet + ", což je zaokrouhleno na "+ result);
+                        Console.WriteLine("Výsledek operace je 1/" + addedCalculation + ", což je zaokrouhleno na "+ result);
                     }
 
                     wrongOperation = false;
@@ -238,7 +238,7 @@ namespace Calculator
                 }
                 else if (operation == "zavorka")
                 {
-                    double zavorka = 0;
+                    double bracket = 0;
 
                     double a;
                     while (true)
@@ -257,7 +257,7 @@ namespace Calculator
                     }
                     
                     Console.WriteLine("Zadej operaci, kterou chces mit v zavorce (soucet/rozdil/soucin/podil):");
-                    string operaceZavorka = Console.ReadLine();
+                    string operationBracket = Console.ReadLine();
 
                     double b;
                     while (true)
@@ -275,19 +275,19 @@ namespace Calculator
                         }
                     }
                     
-                    if (operaceZavorka == "soucet")
+                    if (operationBracket == "soucet")
                     {
-                        zavorka = a + b;                        
+                        bracket = a + b;                        
                     }
-                    else if (operaceZavorka == "rozdil")
+                    else if (operationBracket == "rozdil")
                     {
-                        zavorka = a - b;
+                        bracket = a - b;
                     }
-                    else if (operaceZavorka == "soucin")
+                    else if (operationBracket == "soucin")
                     {
-                        zavorka = a * b;                        
+                        bracket = a * b;                        
                     }
-                    else if (operaceZavorka == "podil")
+                    else if (operationBracket == "podil")
                     {
                         if (b == 0)
                         {
@@ -295,7 +295,7 @@ namespace Calculator
                         }
                         else
                         {
-                            zavorka = a / b;                            
+                            bracket = a / b;                            
                         }
                     }
                     else
@@ -304,7 +304,7 @@ namespace Calculator
                     }
 
                     Console.WriteLine("Zadej operaci, kterou chces mit mimo zavorce (soucet/rozdil/soucin/podil):");
-                    string operaceMimoZavorku = Console.ReadLine();
+                    string operationOutOfBracket = Console.ReadLine();
 
                     double c;
                     while (true)
@@ -322,19 +322,19 @@ namespace Calculator
                         }
                     }
                     
-                    if (operaceMimoZavorku == "soucet")
+                    if (operationOutOfBracket == "soucet")
                     {
-                        result = zavorka + c;
+                        result = bracket + c;
                     }
-                    else if (operaceMimoZavorku == "rozdil")
+                    else if (operationOutOfBracket == "rozdil")
                     {
-                        result = zavorka - c;
+                        result = bracket - c;
                     }
-                    else if (operaceMimoZavorku == "soucin")
+                    else if (operationOutOfBracket == "soucin")
                     {
-                        result = zavorka * c;
+                        result = bracket * c;
                     }
-                    else if (operaceMimoZavorku == "podil")
+                    else if (operationOutOfBracket == "podil")
                     {
                         if (c == 0)
                         {
@@ -342,7 +342,7 @@ namespace Calculator
                         }
                         else
                         {
-                            result = zavorka / c;
+                            result = bracket / c;
                         }
                     }
                     else
@@ -363,11 +363,11 @@ namespace Calculator
                 while (wrongOperation == true)
                 {
                     Console.WriteLine("Chceš přidat ještě jednu operaci (ano/ne)?");
-                    string druhaOperace = Console.ReadLine();
+                    string anotherOperation = Console.ReadLine();
 
-                    if (druhaOperace == "ano")
+                    if (anotherOperation == "ano")
                     {
-                        float novyVysledek = 0;
+                        float newResult = 0;
                                                 
                         double x;
                         while (true)
@@ -386,24 +386,24 @@ namespace Calculator
                         }
                         
                         Console.WriteLine("Vyber operaci (soucet/rozdil/soucin/podil):");
-                        string operaceDva = Console.ReadLine();
+                        string nextOperation = Console.ReadLine();
 
-                        if (operaceDva == "soucet")
+                        if (nextOperation == "soucet")
                         {
-                            novyVysledek = (float)(result + x);
-                            Console.WriteLine("Výsledek operace je " + novyVysledek);
+                            newResult = (float)(result + x);
+                            Console.WriteLine("Výsledek operace je " + newResult);
                         }
-                        else if (operaceDva == "rozdil")
+                        else if (nextOperation == "rozdil")
                         {
-                            novyVysledek = (float)(result - x);
-                            Console.WriteLine("Výsledek operace je " + novyVysledek);
+                            newResult = (float)(result - x);
+                            Console.WriteLine("Výsledek operace je " + newResult);
                         }
-                        else if (operaceDva == "soucin")
+                        else if (nextOperation == "soucin")
                         {
-                            novyVysledek = (float)(result * x);
-                            Console.WriteLine("Výsledek operace je " + novyVysledek);
+                            newResult = (float)(result * x);
+                            Console.WriteLine("Výsledek operace je " + newResult);
                         }
-                        else if (operaceDva == "podil")
+                        else if (nextOperation == "podil")
                         {
                             if (x == 0)
                             {
@@ -411,8 +411,8 @@ namespace Calculator
                             }
                             else
                             {
-                                novyVysledek = (float)(result / x);
-                                Console.WriteLine("Výsledek operace je " + novyVysledek);
+                                newResult = (float)(result / x);
+                                Console.WriteLine("Výsledek operace je " + newResult);
                             }
                         }
                         else
@@ -420,10 +420,10 @@ namespace Calculator
                             Console.WriteLine("Nebyla zadaná operace");
                         }
 
-                        result = novyVysledek;
+                        result = newResult;
 
                     }
-                    else if (druhaOperace == "ne")
+                    else if (anotherOperation == "ne")
                     {
                         Console.WriteLine(" ");
                         wrongOperation = false;
