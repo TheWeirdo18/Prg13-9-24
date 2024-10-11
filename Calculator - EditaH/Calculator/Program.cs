@@ -36,34 +36,74 @@ namespace Calculator
              * 3) Umozni uzivateli zadavat i desetinna cisla, tedy prekopej kalkulacku tak, aby umela pracovat s floaty
              */
 
-            Console.WriteLine("Zadávání desetinných čísel nelze, prosíme o zadání celého čísla" + "\n ");
+            Console.WriteLine("Vzhled zavorky vyjde na [(a /operace/ b) /operace/ c]." + "\n ");
+
+            //pomoc od chatgpt pouze při vraceni uzivatele po nezadani cisla
 
             while (true) 
             {
-                Console.WriteLine("Vyber operaci (soucet/rozdil/soucin/podil/mocnina/druha odmocnina/chci pouzit zavorku):");
+                Console.WriteLine("Vyber operaci (soucet/rozdil/soucin/podil/mocnina/druha odmocnina/zavorka):");
                 string operace = Console.ReadLine();
 
-                float vysledek = 0;
+                double vysledek = 0;
                 
                 bool spatnaOperace = true;
+                
 
                 if (operace == "mocnina")
                 {
-                    Console.WriteLine("Zadej číslo, které chcete mocnit");
+                    /*Console.WriteLine("Zadej číslo, které chcete mocnit");
                     string aString = Console.ReadLine();
-                    float a = Convert.ToInt32(aString);
+                    double a = Convert.ToDouble(aString);*/ //puvodni reseni bez vraceni uzivatele
                     
-                    Console.WriteLine("Zadej číslo mocniny");
-                    string mocninaCisloString = Console.ReadLine();
-                    float mocninaCislo = Convert.ToInt32(mocninaCisloString);
-                    float malo = a;
+                    double a;
+
+                    while (true)
+                    {
+                        Console.WriteLine("Zadej číslo, které chcete mocnit");
+                        string aString = Console.ReadLine();
+                        
+
+                        if (double.TryParse(aString, out _))
+                        {
+                            a = Convert.ToDouble(aString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");                            
+                        }
+
+                    }
+
+                    double mocninaCislo;
+                    double malo = a;
+                    
+                    while (true)
+                    {
+                        Console.WriteLine("Zadej číslo mocniny");
+                        string mocninaCisloString = Console.ReadLine();
+
+
+                        if (double.TryParse(mocninaCisloString, out _))
+                        {
+                            mocninaCislo = Convert.ToDouble(mocninaCisloString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+
+                    }                    
+
                     if (mocninaCislo == 0)
                     {
-                        vysledek = 0;
+                        vysledek = 1;
 
                         Console.WriteLine("Výsledek operace je " + vysledek);
                     }
-                    else if (mocninaCislo > 0)
+                    else if (mocninaCislo > 1)
                     {
                         while (mocninaCislo > 1)
                         {
@@ -74,9 +114,15 @@ namespace Calculator
 
                         Console.WriteLine("Výsledek operace je " + vysledek);
                     }
+                    else if (mocninaCislo == 1)
+                    {
+                        vysledek = a;
+
+                        Console.WriteLine("Výsledek operace je " + vysledek);
+                    }
                     else
                     {
-                        float meziVypocet = 0;
+                        double meziVypocet = 0;
 
                         while (mocninaCislo < -1)
                         {
@@ -95,9 +141,23 @@ namespace Calculator
 
                 else if (operace == "druha odmocnina")
                 {
-                    Console.WriteLine("Zadej číslo, které chceš odmocnit");
-                    string aString = Console.ReadLine();
-                    float a = Convert.ToInt32(aString);
+                    double a;
+
+                    while (true)
+                    {
+                        Console.WriteLine("Zadej číslo, které chceš odmocnit");
+                        string aString = Console.ReadLine();
+
+                        if (double.TryParse(aString, out _))
+                        {
+                            a = Convert.ToDouble(aString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+                    }
 
                     if (a >= 0)
                     {
@@ -114,13 +174,38 @@ namespace Calculator
 
                 else if (operace == "soucet" || operace == "rozdil" || operace == "soucin" || operace == "podil")
                 {
-                    Console.WriteLine("Zadej první číslo");
-                    string aString = Console.ReadLine();
-                    float a = Convert.ToInt32(aString);
+                    double a;
+                    while (true)
+                    {
+                        Console.WriteLine("Zadej první číslo");
+                        string aString = Console.ReadLine();
 
-                    Console.WriteLine("Zadej druhé číslo");
-                    string bString = Console.ReadLine();
-                    float b = Convert.ToInt32(bString);
+                        if (double.TryParse(aString, out _))
+                        {
+                            a = Convert.ToDouble(aString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+                    }
+
+                    double b;
+                    while (true)
+                    {
+                        Console.WriteLine("Zadej druhé číslo");
+                        string bString = Console.ReadLine();
+                        if (double.TryParse(bString, out _))
+                        {
+                            b = Convert.ToDouble(bString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+                    }
 
                     if (operace == "soucet")
                     {
@@ -151,20 +236,44 @@ namespace Calculator
                     }
 
                 }
-                else if (operace == "chci pouzit zavorku")
+                else if (operace == "zavorka")
                 {
-                    float zavorka = 0;
-                    
-                    Console.WriteLine("zadej prvni cislo v zavorce");
-                    string aString = Console.ReadLine();
-                    float a = Convert.ToInt32(aString); 
+                    double zavorka = 0;
+
+                    double a;
+                    while (true)
+                    {
+                        Console.WriteLine("zadej prvni cislo v zavorce");
+                        string aString = Console.ReadLine();
+                        if (double.TryParse(aString, out _))
+                        {
+                            a = Convert.ToDouble(aString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+                    }
                     
                     Console.WriteLine("Zadej operaci, kterou chces mit v zavorce (soucet/rozdil/soucin/podil):");
-                    String operaceZavorka = Console.ReadLine();
-                    
-                    Console.WriteLine("zadej druhe cislo v zavorce");
-                    string bString = Console.ReadLine();
-                    float b = Convert.ToInt32(bString);
+                    string operaceZavorka = Console.ReadLine();
+
+                    double b;
+                    while (true)
+                    {
+                        Console.WriteLine("zadej druhe cislo v zavorce");
+                        string bString = Console.ReadLine();
+                        if (double.TryParse(bString, out _))
+                        {
+                            b = Convert.ToDouble(bString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+                    }
                     
                     if (operaceZavorka == "soucet")
                     {
@@ -189,13 +298,29 @@ namespace Calculator
                             zavorka = a / b;                            
                         }
                     }
-                    
-                    Console.WriteLine("Zadej operaci, kterou chces mit mimo zavorce (soucet/rozdil/soucin/podil):");
-                    String operaceMimoZavorku = Console.ReadLine();
+                    else
+                    {
+                        Console.WriteLine("Nebyla zadaná operace");
+                    }
 
-                    Console.WriteLine("Zadej číslo, které je mimo závorku"); 
-                    string cString = Console.ReadLine();
-                    float c = Convert.ToInt32(cString);
+                    Console.WriteLine("Zadej operaci, kterou chces mit mimo zavorce (soucet/rozdil/soucin/podil):");
+                    string operaceMimoZavorku = Console.ReadLine();
+
+                    double c;
+                    while (true)
+                    {
+                        Console.WriteLine("Zadej číslo, které je mimo závorku");
+                        string cString = Console.ReadLine();
+                        if (double.TryParse(cString, out _))
+                        {
+                            c = Convert.ToDouble(cString);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebylo zadané číslo");
+                        }
+                    }
                     
                     if (operaceMimoZavorku == "soucet")
                     {
@@ -220,8 +345,14 @@ namespace Calculator
                             vysledek = zavorka / c;
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("Nebyla zadaná operace");
+                    }
                     
                     Console.WriteLine("Výsledek operace je " + vysledek);
+
+                    spatnaOperace = false;
                 }
                 else
                 {
@@ -232,32 +363,44 @@ namespace Calculator
                 while (spatnaOperace == true)
                 {
                     Console.WriteLine("Chceš přidat ještě jednu operaci (ano/ne)?");
-                    String druhaOperace = Console.ReadLine();
+                    string druhaOperace = Console.ReadLine();
 
                     if (druhaOperace == "ano")
                     {
                         float novyVysledek = 0;
-
+                                                
+                        double x;
+                        while (true)
+                        {
+                            Console.WriteLine("Zadej další číslo");
+                            string xString = Console.ReadLine();
+                            if (double.TryParse(xString, out _))
+                            {
+                                x = Convert.ToDouble(xString);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nebylo zadané číslo");
+                            }
+                        }
+                        
                         Console.WriteLine("Vyber operaci (soucet/rozdil/soucin/podil):");
                         string operaceDva = Console.ReadLine();
 
-                        Console.WriteLine("Zadej další číslo");
-                        string xString = Console.ReadLine();
-                        float x = Convert.ToInt32(xString);
-
                         if (operaceDva == "soucet")
                         {
-                            novyVysledek = vysledek + x;
+                            novyVysledek = (float)(vysledek + x);
                             Console.WriteLine("Výsledek operace je " + novyVysledek);
                         }
                         else if (operaceDva == "rozdil")
                         {
-                            novyVysledek = vysledek - x;
+                            novyVysledek = (float)(vysledek - x);
                             Console.WriteLine("Výsledek operace je " + novyVysledek);
                         }
                         else if (operaceDva == "soucin")
                         {
-                            novyVysledek = vysledek * x;
+                            novyVysledek = (float)(vysledek * x);
                             Console.WriteLine("Výsledek operace je " + novyVysledek);
                         }
                         else if (operaceDva == "podil")
@@ -268,9 +411,13 @@ namespace Calculator
                             }
                             else
                             {
-                                novyVysledek = vysledek / x;
+                                novyVysledek = (float)(vysledek / x);
                                 Console.WriteLine("Výsledek operace je " + novyVysledek);
                             }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nebyla zadaná operace");
                         }
 
                         vysledek = novyVysledek;
