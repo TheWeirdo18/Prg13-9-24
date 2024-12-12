@@ -38,6 +38,9 @@ namespace BattleShipsUkol2___HE
 
             //souřadnice hráče (h) pojmenované anglicky, souřadnice počítače (p) německy (pro rozlišení)
 
+            ////hodit psaní lodí hráče do whilu
+            ////vymyslet počítač psaní lodí
+
             int[,] myArray = new int[11, 11]; //vytvoření pole h
             int number = -1;           
             for(int i = 0; i < myArray.GetLength(0); i++)
@@ -68,113 +71,142 @@ namespace BattleShipsUkol2___HE
 
             PrintArray(myArray); PrintArray(opponentsArray);
 
+            Random rnd = new Random();
             int airplane = 5; int battle = 4; int cruiser = 3; int submarine = 3; int destroyer = 2; //délky lodí
 
-            Random rnd = new Random();
-            int einX = rnd.Next(1, 11); int einY = rnd.Next(1, 11); int zweiX = rnd.Next(1, 11); int zweiY = rnd.Next(1, 11); int dreiX = rnd.Next(1, 11); int dreiY = rnd.Next(1, 11); int vierX = rnd.Next(1, 11); int vierY = rnd.Next(1, 11); int funfX = rnd.Next(1, 11); int funfY = rnd.Next(1, 11); //vytvoření souřadnic p
-            int directionEin = rnd.Next(0, 2); int directionZwei = rnd.Next(0, 2); int directionDrei = rnd.Next(0, 2); int directionVier = rnd.Next(0, 2); int directionFunf = rnd.Next(0, 2); //směry lodí p
-
+            int airplaneDirection = rnd.Next(0, 2); int battleDirection = rnd.Next(0, 2); int cruiserDirection = rnd.Next(0, 2); int submarineDirection = rnd.Next(0, 2); int destroyerDirection = rnd.Next(0, 2);
+            int einX, einY; //vytvoření souřadnic p
+            int directionOpponentEin = rnd.Next(0, 2); int directionOpponentZwei = rnd.Next(0, 2); int directionOpponentDrei = rnd.Next(0, 2); int directionOpponentVier = rnd.Next(0, 2); int directionOpponentFunf = rnd.Next(0, 2); //směry lodí p
+            
+            if (airplaneDirection == 0)
+            {
+                einX = rnd.Next(1, 11 - airplane);
+                einY = rnd.Next(1, 11);
+            }
+            else
+            {
+                einX = rnd.Next(1, 11);
+                einY = rnd.Next(1, 11 - airplane);
+            }
             for (int i = 0; i < airplane; i++)
             {
-                for ()
+                opponentsArray[einX+(airplaneDirection == 0 ? i : 0), einY+(airplaneDirection == 1 ? i : 0)] = 1;                                                              
             }
-            
-                /*for (int i = 0; i < airplane; i++)
-                {
-                    if (opponentsArray[einX, einY] != 0)
-                    {
-                        
-                    }
-                    else
-                    {
-                        opponentsArray[einX, einY] = 1;
-                        if (directionEin == 0)
-                        {
-                            einY++;
-                        }
-                        else
-                        {
-                            einX++;
-                        }
-                    }
-                }*/
-            if (opponentsArray[zweiX, zweiY] != 0)
-            {
 
-            }
-            else
+            //umístění battle
+            bool occupied = false;
+            do
             {
+                occupied = false;
+                if (battleDirection == 0)
+                {
+                    einX = rnd.Next(1, 11 - battle);
+                    einY = rnd.Next(1, 11);
+                }
+                else
+                {
+                    einX = rnd.Next(1, 11);
+                    einY = rnd.Next(1, 11 - battle);
+                }
                 for (int i = 0; i < battle; i++)
                 {
-                    opponentsArray[zweiX, zweiY] = 1;
-                    if (directionZwei == 0)
+                    if(opponentsArray[einX + (battleDirection == 0 ? i : 0), einY + (battleDirection == 1 ? i : 0)] != 0)
                     {
-                        zweiY++;
-                    }
-                    else
-                    {
-                        zweiX++;
+                        occupied = true;
                     }
                 }
-            }
-            if (opponentsArray[dreiX, dreiY] != 0)
+            } while (occupied);
+            for (int i = 0; i < battle; i++)
             {
+                opponentsArray[einX + (battleDirection == 0 ? i : 0), einY + (battleDirection == 1 ? i : 0)] = 2;
+            }
 
-            }
-            else
+            //umístění cruiser
+            occupied = false;
+            do
             {
+                occupied = false;
+                if (cruiserDirection == 0)
+                {
+                    einX = rnd.Next(1, 11 - cruiser);
+                    einY = rnd.Next(1, 11);
+                }
+                else
+                {
+                    einX = rnd.Next(1, 11);
+                    einY = rnd.Next(1, 11 - cruiser);
+                }
                 for (int i = 0; i < cruiser; i++)
                 {
-                    opponentsArray[einX, einY] = 1;
-                    if (directionEin == 0)
+                    if (opponentsArray[einX + (cruiserDirection == 0 ? i : 0), einY + (cruiserDirection == 1 ? i : 0)] != 0)
                     {
-                        einY++;
-                    }
-                    else
-                    {
-                        einX++;
+                        occupied = true;
                     }
                 }
-            }
-            if (opponentsArray[einX, einY] != 0)
+            } while (occupied);
+            for (int i = 0; i < cruiser; i++)
             {
+                opponentsArray[einX + (cruiserDirection == 0 ? i : 0), einY + (cruiserDirection == 1 ? i : 0)] = 3;
+            }
 
-            }
-            else
+            //umístění submarine
+            occupied = false;
+            do
             {
-                for (int i = 0; i < airplane; i++)
+                occupied = false;
+                if (submarineDirection == 0)
                 {
-                    opponentsArray[einX, einY] = 1;
-                    if (directionEin == 0)
-                    {
-                        einY++;
-                    }
-                    else
-                    {
-                        einX++;
-                    }
+                    einX = rnd.Next(1, 11 - submarine);
+                    einY = rnd.Next(1, 11);
                 }
-            }
-            if (opponentsArray[einX, einY] != 0)
-            {
-
-            }
-            else
-            {
-                for (int i = 0; i < airplane; i++)
+                else
                 {
-                    opponentsArray[einX, einY] = 1;
-                    if (directionEin == 0)
+                    einX = rnd.Next(1, 11);
+                    einY = rnd.Next(1, 11 - submarine);
+                }
+                for (int i = 0; i < submarine; i++)
+                {
+                    if (opponentsArray[einX + (submarineDirection == 0 ? i : 0), einY + (submarineDirection == 1 ? i : 0)] != 0)
                     {
-                        einY++;
-                    }
-                    else
-                    {
-                        einX++;
+                        occupied = true;
                     }
                 }
+            } while (occupied);
+            for (int i = 0; i < submarine; i++)
+            {
+                opponentsArray[einX + (submarineDirection == 0 ? i : 0), einY + (submarineDirection == 1 ? i : 0)] = 4;
             }
 
+            //umístění destroyer
+            occupied = false;
+            do
+            {
+                occupied = false;
+                if (destroyerDirection == 0)
+                {
+                    einX = rnd.Next(1, 11 - destroyer);
+                    einY = rnd.Next(1, 11);
+                }
+                else
+                {
+                    einX = rnd.Next(1, 11);
+                    einY = rnd.Next(1, 11 - destroyer);
+                }
+                for (int i = 0; i < destroyer; i++)
+                {
+                    if (opponentsArray[einX + (destroyerDirection == 0 ? i : 0), einY + (destroyerDirection == 1 ? i : 0)] != 0)
+                    {
+                        occupied = true;
+                    }
+                }
+            } while (occupied);
+            for (int i = 0; i < destroyer; i++)
+            {
+                opponentsArray[einX + (destroyerDirection == 0 ? i : 0), einY + (destroyerDirection == 1 ? i : 0)] = 5;
+            }
+
+            PrintArray(opponentsArray);            
+                
             Console.WriteLine("\nMáte k dispozici 5 lodí - Letadlovou (1x5; 1), Bitevní(1x4; 2), " +
                 "Křižník(1x3; 3), Ponorku(1x3; 4) a Torpédoborec(1x2; 5) v tomto pořadí. Souřadnice pište sloupec-řádek. Napište souřadnice předku první lodi.");
 
@@ -212,7 +244,7 @@ namespace BattleShipsUkol2___HE
             Console.WriteLine("Chcete loď vodorovně?");
             string directionTwo = Console.ReadLine();
 
-            //if (twoX <= myArray.GetLength(0) && twoY <= myArray.GetLength(0))
+            //if (twoX < myArray.GetLength(0) && twoY < myArray.GetLength(0))
             //{
                 if (myArray[twoX, twoY] != 0)
                 {
@@ -336,6 +368,13 @@ namespace BattleShipsUkol2___HE
             }
             PrintArray(myArray);
 
+            while (true)
+            {
+                Console.WriteLine("Napište souřadnice políčka, které chcete odstřelit.");
+
+                string attackedXString = Console.ReadLine();
+                int attackedX = CheckIfNumber(attackedXString);
+            }
             Console.ReadKey();
         }
     }
