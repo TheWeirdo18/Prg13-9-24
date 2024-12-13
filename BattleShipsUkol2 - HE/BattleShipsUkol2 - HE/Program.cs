@@ -29,13 +29,6 @@ namespace BattleShipsUkol2___HE
         }
         static void Main(string[] args)
         {
-            /*
-            string imput = Console.ReadLine();
-            char firstChar = imput[0];
-            List<char> rows = new List<char> {'a', 'b'};
-            int index = rows.IndexOf(firstChar);
-            */
-
             //souřadnice hráče (h) pojmenované anglicky, souřadnice počítače (p) německy (pro rozlišení)
 
             int[,] myArray = new int[11, 11]; //vytvoření pole h
@@ -66,7 +59,7 @@ namespace BattleShipsUkol2___HE
                 otherNumber++;
             }
 
-            int[,] opponentsShowedArray = new int[11, 11]; //vytvoření pole p (které se ukazuje)
+            int[,] opponentsShowedArray = new int[11, 11]; //vytvoření pole p (s rozpoložením střel h)
             int otherOtherNumber = -1;
             for (int i = 0; i < opponentsShowedArray.GetLength(0); i++)
             {
@@ -80,8 +73,6 @@ namespace BattleShipsUkol2___HE
                 otherOtherNumber++;
             }
 
-            PrintArray(myArray); PrintArray(opponentsArray); PrintArray(opponentsShowedArray);
-
             Random rnd = new Random();
             int airplane = 5; int battle = 4; int cruiser = 3; int submarine = 3; int destroyer = 2; //délky lodí
 
@@ -89,6 +80,7 @@ namespace BattleShipsUkol2___HE
             int einX, einY; //vytvoření souřadnic p
             int directionOpponentEin = rnd.Next(0, 2); int directionOpponentZwei = rnd.Next(0, 2); int directionOpponentDrei = rnd.Next(0, 2); int directionOpponentVier = rnd.Next(0, 2); int directionOpponentFunf = rnd.Next(0, 2); //směry lodí p
             
+            //umístění airplane
             if (airplaneDirection == 0)
             {
                 einX = rnd.Next(1, 11 - airplane);
@@ -214,19 +206,15 @@ namespace BattleShipsUkol2___HE
             for (int i = 0; i < destroyer; i++)
             {
                 opponentsArray[einX + (destroyerDirection == 0 ? i : 0), einY + (destroyerDirection == 1 ? i : 0)] = 5;
-            }
-
-            PrintArray(opponentsArray);            
+            }         
                 
             Console.WriteLine("\nMáte k dispozici 5 lodí - Letadlovou (1x5; 1), Bitevní(1x4; 2), " +
                 "Křižník(1x3; 3), Ponorku(1x3; 4) a Torpédoborec(1x2; 5) v tomto pořadí. Souřadnice pište sloupec-řádek. Napište souřadnice předku první lodi.");
 
-            string firstX = Console.ReadLine();            
-            int oneX = CheckIfNumber(firstX);            
-                        
+            string firstX = Console.ReadLine();
+            int oneX = CheckIfNumber(firstX);                        
             string firstY = Console.ReadLine();            
-            int oneY = CheckIfNumber(firstY);
-            
+            int oneY = CheckIfNumber(firstY);            
             Console.WriteLine("Chcete loď vodorovně?");
             string directionOne = Console.ReadLine();
 
@@ -245,19 +233,20 @@ namespace BattleShipsUkol2___HE
             PrintArray(myArray);
 
             Console.WriteLine("Zadejte souřadnice druhé lodě");
-
             string secondX = Console.ReadLine();
             int twoX = CheckIfNumber(secondX);
-
             string secondY = Console.ReadLine();
             int twoY = CheckIfNumber(secondY);
-
             Console.WriteLine("Chcete loď vodorovně?");
             string directionTwo = Console.ReadLine();
 
             if (myArray[twoX, twoY] != 0)
             {
                 Console.WriteLine("Zde už je jiná loď");
+            }
+            else if (twoX + twoY > 22) 
+            {
+                Console.WriteLine("Jste mimo pole");
             }
             else
             {
@@ -277,19 +266,20 @@ namespace BattleShipsUkol2___HE
             PrintArray(myArray);
 
             Console.WriteLine("Zadejte souřadnice třetí lodě");
-
             string thirdX = Console.ReadLine();
             int threeX = CheckIfNumber(thirdX);
-
             string thirdY = Console.ReadLine();
             int threeY = CheckIfNumber(thirdY);
-
             Console.WriteLine("Chcete loď vodorovně?");
             string directionThree = Console.ReadLine();
 
             if (myArray[threeX, threeY] != 0)
             {
                 Console.WriteLine("Zde už je jiná loď");
+            }
+            else if (threeX + threeY > 22)
+            {
+                Console.WriteLine("Jste mimo pole");
             }
             else
             {
@@ -309,19 +299,20 @@ namespace BattleShipsUkol2___HE
             PrintArray(myArray);
 
             Console.WriteLine("Zadejte souřadnice čtvrté lodě");
-
             string fourthX = Console.ReadLine();
             int fourX = CheckIfNumber(fourthX);
-
             string fourthY = Console.ReadLine();
             int fourY = CheckIfNumber(fourthY);
-
             Console.WriteLine("Chcete loď vodorovně?");
             string directionFour = Console.ReadLine();
 
             if (myArray[fourX, fourY] != 0)
             {
                 Console.WriteLine("Zde už je jiná loď");
+            }
+            else if (fourX + fourY > 22)
+            {
+                Console.WriteLine("Jste mimo pole");
             }
             else
             {
@@ -341,19 +332,20 @@ namespace BattleShipsUkol2___HE
             PrintArray(myArray);
 
             Console.WriteLine("Zadejte souřadnice páté lodě");
-
             string fifthX = Console.ReadLine();
             int fiveX = CheckIfNumber(fifthX);
-
             string fifthY = Console.ReadLine();
             int fiveY = CheckIfNumber(fifthY);
-
             Console.WriteLine("Chcete loď vodorovně?");
             string directionFive = Console.ReadLine();
 
             if (myArray[fiveX, fiveY] != 0)
             {
                 Console.WriteLine("Zde už je jiná loď");
+            }
+            else if (fiveX + fiveY > 22)
+            {
+                Console.WriteLine("Jste mimo pole");
             }
             else
             {
@@ -378,10 +370,8 @@ namespace BattleShipsUkol2___HE
             while (true)
             {                
                 Console.WriteLine("\nNapište souřadnice políčka, které chcete odstřelit.");
-
                 string attackedXString = Console.ReadLine();
                 int attackedX = CheckIfNumber(attackedXString);
-
                 string attackedYString = Console.ReadLine();
                 int attackedY = CheckIfNumber(attackedYString);
 
@@ -393,15 +383,15 @@ namespace BattleShipsUkol2___HE
                 }
                 else
                 {
-                    Console.WriteLine("\nSestřelena loď");
-                    opponentsArray[attackedX, attackedY] = 9;
-                    opponentsShowedArray[attackedX, attackedY] = 9;
                     shipsOpponent--;
                     if(shipsOpponent == 0)
                     {
                         Console.WriteLine("\nHráč sestřelil všechny lodě a vyhrál");
                         break;
                     }
+                    Console.WriteLine("\nSestřelena loď");
+                    opponentsArray[attackedX, attackedY] = 9;
+                    opponentsShowedArray[attackedX, attackedY] = 9;                    
                 }
 
                 int itAttackedX, itAttackedY;
@@ -436,11 +426,8 @@ namespace BattleShipsUkol2___HE
                 PrintArray(opponentsShowedArray);
 
                 Console.WriteLine("\n");
-
                 Console.WriteLine("Počítač sestřelil pole " + itAttackedX + ", " + itAttackedY);
                 PrintArray(myArray);
-                
-                //vymyslet útočení hráče a pak i počítače
             }
             Console.ReadKey();
         }
