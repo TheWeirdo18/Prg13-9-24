@@ -1202,6 +1202,7 @@ namespace Vlastni_hra
                                     }
                                     else { leave = 0; }
                                 }
+                                else { leave = 0; }
                             }
                         }
                         else if (crossroadsRoom == "Library" || crossroadsRoom == "library")
